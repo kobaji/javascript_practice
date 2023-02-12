@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+</head>
+<body>
+    <p id="explanationMessage">好きな数字を選んでね！</p>
+    <button id="numButton1">1</button>
+    <span id="result1">はずれ</span>
+    <br>
+    <button id="numButton2">2</button>
+    <span id="result2">はずれ</span>
+    <br>
+    <button id="numButton3">3</button>
+    <span id="result3">はずれ</span>
+    <br>
+    <button id="resetButton">reset</button>
+    <script>
+'use strict'; // 厳密なエラーチェックも行われる
+
+let resetButton = document.getElementById('resetButton');
+
+let numButton1 = document.getElementById('numButton1');
+let numButton2 = document.getElementById('numButton2');
+let numButton3 = document.getElementById('numButton3');
+let numButtons = [numButton1, numButton2, numButton3];
+
+let result1 = document.getElementById('result1');
+let result2 = document.getElementById('result2');
+let result3 = document.getElementById('result3');
+let results = [result1, result2, result3];
+
+// let num = Math.floor( Math.random() * ( numButtons.length ));
+
+results.forEach(result =>
+        result.style.display = "none"
+);
+
+function changeResult(index){
+    results[index].textContent = "あたり";
+}
+
+function showResults(numButton){
+    numButtons.forEach(function(numButton, index){
+        results[index].style.display = "initial";
+    }
+    );
+}
+
+function initializeResults(){
+    results.forEach(result =>
+        result.textContent = "はずれ"
+    )
+}
+
+function deleteResults(){
+    results.forEach(result =>
+        result.style.display = "none"
+    )
+}
+
+
+function disableNumButtons(numButton){
+    numButtons.forEach(numButton =>
+        numButton.setAttribute("disabled", true)
+    )
+}
+
+function enableNumButtons(numButton){
+    numButtons.forEach(numButton =>
+        numButton.removeAttribute("disabled")
+    )
+}
+
+numButtons.forEach(function(numButton, index){
+    numButton.addEventListener('click', function(e){
+        changeResult(index);
+        showResults(numButton);
+        disableNumButtons(numButton);
+    })
+}
+)
+
+resetButton.addEventListener('click', function(e){
+    deleteResults();
+    initializeResults();
+    enableNumButtons();
+}, false);
+
+
+    </script>
+
+</body>
+</html>

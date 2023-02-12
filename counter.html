@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COUNTER</title>
+</head>
+<body>
+    <p id="counter">0</p>
+    <button id="countUpButton">+1</button>
+    <button id="countDownButton">-1</button>
+    <button id="resetButton">Reset</button>
+    <script>
+'use strict'; // 厳密なエラーチェックも行われる
+
+let num = 0;
+
+function setNum(num){
+    const counter = document.getElementById('counter');  
+    counter.textContent = num;
+}
+
+
+function countUp() {
+    num++;
+    setNum(num);
+}
+
+const countUpButton = document.getElementById('countUpButton');
+countUpButton.addEventListener('click', countUp, false);
+
+function countDown() {
+    num--;
+    setNum(num);
+}
+
+const countDownButton = document.getElementById('countDownButton');
+countDownButton.addEventListener('click', countDown, false);
+
+
+function reset() {
+    num = 0;
+    setNum(num);
+}
+
+const resetButton = document.getElementById('resetButton');
+resetButton.addEventListener('click', reset, false);
+
+
+    </script>
+
+</body>
+</html>
