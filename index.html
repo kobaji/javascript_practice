@@ -17,9 +17,9 @@
     <button id="numButton3">3</button>
     <span id="result3">はずれ</span>
     <br>
-    <button id="resetButton">reset</button>
+    <button id="resetButton">もう1回遊ぶ</button>
     <script>
-'use strict'; // 厳密なエラーチェックも行われる
+'use strict';
 
 let resetButton = document.getElementById('resetButton');
 
@@ -33,14 +33,16 @@ let result2 = document.getElementById('result2');
 let result3 = document.getElementById('result3');
 let results = [result1, result2, result3];
 
-// let num = Math.floor( Math.random() * ( numButtons.length ));
+
 
 results.forEach(result =>
         result.style.display = "none"
 );
 
-function changeResult(index){
-    results[index].textContent = "あたり";
+function changeResult(){
+    let num = Math.floor( Math.random() * ( numButtons.length ));
+    results[num].textContent = "あたり";
+    results[num].style.color = '#ff0000';
 }
 
 function showResults(numButton){
@@ -77,7 +79,7 @@ function enableNumButtons(numButton){
 
 numButtons.forEach(function(numButton, index){
     numButton.addEventListener('click', function(e){
-        changeResult(index);
+        changeResult();
         showResults(numButton);
         disableNumButtons(numButton);
     })
