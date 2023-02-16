@@ -53,8 +53,10 @@ function showResults(numButton){
 }
 
 function initializeResults(){
-    results.forEach(result =>
-        result.textContent = "はずれ"
+    results.forEach(function(result){
+        result.textContent = "はずれ";
+        result.style.removeProperty('color');
+    }
     )
 }
 
