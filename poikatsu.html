@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span>歩数上限</span>
+            <select name="numStepLimit" id="numStepLimit">
+                <option value="default">10,000</option>
+                <option value="15000">15,000</option>
+                <option value="20000">20,000</option>
+                <option value="25000">25,000</option>
+                <option value="30000">30,000</option>
+            </select>       
+        </li>
+        <li>
+            <span>動画広告を見る割合</span>
+            <select name="ratioSeeAd" id="ratioSeeAd">
+                <option value="default">100</option>
+                <option value="none">0</option>
+            </select>
+        </li>
+        <li>
+            <span>動画広告で移動マイル3倍にする?</span>
+            <input id="selectRadioYes" type="radio" name="mileTripleByMove" value="はい"><label for="selectRadioYes">はい</label>
+            <input id="selectRadioNo" type="radio" name="mileTripleByMove" value="いいえ"><label for="selectRadioNo">いいえ</label>
+        </li>
+        <li>
+            <span id="columnDailyStep">1日の歩数</span>
+            <input id="numStepDaily" type="number">歩
+        </li>
+    </ul>
+    <button id="calcButton">計算する</button>
+    <hr>
+    <ul>
+        <li>
+            <span>歩数による獲得マイル:</span>
+            <span id="mileStepDaily"></span>
+        </li>
+        <li>
+            <span>移動による獲得マイル:</span>
+            <span id="mileMoveDaily"></span>
+        </li>
+        <li>
+            <span>合計獲得マイル:</span>
+            <span id="mileTotalDaily"></span>
+        </li>
+        <li>
+            <span>合計獲得マイル(円換算):</span>
+            <span id="yenStepDaily"></span>
+        </li>
+    </ul>
+    <script>
+'use strict';
+
+const rateMileYen = 120;
+
+let numStepLimit = document.getElementById('numStepLimit');
+let numStepDaily = document.getElementById('numStepDaily');
+let columnDailyStep = document.getElementById('columnDailyStep');
+let mileStepDaily = document.getElementById('mileStepDaily');
+let calcButton = document.getElementById('calcButton');
+let valueMileStep;
+
+function calcmileStepDaily(){
+    if(numStepDaily.value === ""){
+        valueMileStep = columnDailyStep.textContent + "を入力してください。";
+    } else {
+        valueMileStep = numStepDaily.value;
+    }
+    mileStepDaily.textContent = valueMileStep;
+};
+
+calcButton.addEventListener('click', function(e){
+    calcmileStepDaily();
+}, false);
+
+    </script>
+
+</body>
+</html>
