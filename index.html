@@ -1,86 +1,178 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BINGO!!</title>
-</head>
-<body>
-    <ul>
-        <li>
-            <span>歩数上限</span>
-            <select name="numStepLimit" id="numStepLimit">
-                <option value="default">10,000</option>
-                <option value="15000">15,000</option>
-                <option value="20000">20,000</option>
-                <option value="25000">25,000</option>
-                <option value="30000">30,000</option>
-            </select>       
-        </li>
-        <li>
-            <span>動画広告を見る割合</span>
-            <select name="ratioSeeAd" id="ratioSeeAd">
-                <option value="default">100</option>
-                <option value="none">0</option>
-            </select>
-        </li>
-        <li>
-            <span>動画広告で移動マイル3倍にする?</span>
-            <input id="selectRadioYes" type="radio" name="mileTripleByMove" value="はい"><label for="selectRadioYes">はい</label>
-            <input id="selectRadioNo" type="radio" name="mileTripleByMove" value="いいえ"><label for="selectRadioNo">いいえ</label>
-        </li>
-        <li>
-            <span id="columnDailyStep">1日の歩数</span>
-            <input id="numStepDaily" type="number">歩
-        </li>
-    </ul>
-    <button id="calcButton">計算する</button>
-    <hr>
-    <ul>
-        <li>
-            <span>歩数による獲得マイル:</span>
-            <span id="mileStepDaily"></span>
-        </li>
-        <li>
-            <span>移動による獲得マイル:</span>
-            <span id="mileMoveDaily"></span>
-        </li>
-        <li>
-            <span>合計獲得マイル:</span>
-            <span id="mileTotalDaily"></span>
-        </li>
-        <li>
-            <span>合計獲得マイル(円換算):</span>
-            <span id="yenStepDaily"></span>
-        </li>
-    </ul>
-    <script>
-'use strict';
+    <style type="text/css">
+      #numResult {
+        font-size: 5em;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="bingo">クリック！</button>
+    <p id="numResult">???</p>
+    <hr />
+    <p>既に出ている数字(<span style="color:red">赤字</span>)</p>
+    <div>
+        <span id="num1">	1	</span>
+        <span id="num2">	2	</span>
+        <span id="num3">	3	</span>
+        <span id="num4">	4	</span>
+        <span id="num5">	5	</span>
+        <span id="num6">	6	</span>
+        <span id="num7">	7	</span>
+        <span id="num8">	8	</span>
+        <span id="num9">	9	</span>
+        <span id="num10">	10	</span>
+        <span id="num11">	11	</span>
+        <span id="num12">	12	</span>
+        <span id="num13">	13	</span>
+        <span id="num14">	14	</span>
+        <span id="num15">	15	</span>
+        <span id="num16">	16	</span>
+        <span id="num17">	17	</span>
+        <span id="num18">	18	</span>
+        <span id="num19">	19	</span>
+        <span id="num20">	20	</span>
+        <br>
+        <span id="num21">	21	</span>
+        <span id="num22">	22	</span>
+        <span id="num23">	23	</span>
+        <span id="num24">	24	</span>
+        <span id="num25">	25	</span>
+        <span id="num26">	26	</span>
+        <span id="num27">	27	</span>
+        <span id="num28">	28	</span>
+        <span id="num29">	29	</span>
+        <span id="num30">	30	</span>
+        <span id="num31">	31	</span>
+        <span id="num32">	32	</span>
+        <span id="num33">	33	</span>
+        <span id="num34">	34	</span>
+        <span id="num35">	35	</span>
+        <span id="num36">	36	</span>
+        <span id="num37">	37	</span>
+        <span id="num38">	38	</span>
+        <span id="num39">	39	</span>
+        <span id="num40">	40	</span>
+        <br>
+        <span id="num41">	41	</span>
+        <span id="num42">	42	</span>
+        <span id="num43">	43	</span>
+        <span id="num44">	44	</span>
+        <span id="num45">	45	</span>
+        <span id="num46">	46	</span>
+        <span id="num47">	47	</span>
+        <span id="num48">	48	</span>
+        <span id="num49">	49	</span>
+        <span id="num50">	50	</span>
+        <span id="num51">	51	</span>
+        <span id="num52">	52	</span>
+        <span id="num53">	53	</span>
+        <span id="num54">	54	</span>
+        <span id="num55">	55	</span>
+        <span id="num56">	56	</span>
+        <span id="num57">	57	</span>
+        <span id="num58">	58	</span>
+        <span id="num59">	59	</span>
+        <span id="num60">	60	</span>
+        <br>
+        <span id="num61">	61	</span>
+        <span id="num62">	62	</span>
+        <span id="num63">	63	</span>
+        <span id="num64">	64	</span>
+        <span id="num65">	65	</span>
+        <span id="num66">	66	</span>
+        <span id="num67">	67	</span>
+        <span id="num68">	68	</span>
+        <span id="num69">	69	</span>
+        <span id="num70">	70	</span>
+        <span id="num71">	71	</span>
+        <span id="num72">	72	</span>
+        <span id="num73">	73	</span>
+        <span id="num74">	74	</span>
+        <span id="num75">	75	</span>
+        <span id="num76">	76	</span>
+        <span id="num77">	77	</span>
+        <span id="num78">	78	</span>
+        <span id="num79">	79	</span>
+        <span id="num80">	80	</span>
+        <br>
+        <span id="num81">	81	</span>
+        <span id="num82">	82	</span>
+        <span id="num83">	83	</span>
+        <span id="num84">	84	</span>
+        <span id="num85">	85	</span>
+        <span id="num86">	86	</span>
+        <span id="num87">	87	</span>
+        <span id="num88">	88	</span>
+        <span id="num89">	89	</span>
+        <span id="num90">	90	</span>
+        <span id="num91">	91	</span>
+        <span id="num92">	92	</span>
+        <span id="num93">	93	</span>
+        <span id="num94">	94	</span>
+        <span id="num95">	95	</span>
+        <span id="num96">	96	</span>
+        <span id="num97">	97	</span>
+        <span id="num98">	98	</span>
+        <span id="num99">	99	</span>
+    </div>
+        <script>
+      "use strict";
+      // 数字を0で初期化
 
-const rateMileYen = 120;
+      let num;
+      let numArray = [1, 2, 3];
+      //   let numArray = [];
+      let numMin = 1;
+      let numMax = 99;
 
-let numStepLimit = document.getElementById('numStepLimit');
-let numStepDaily = document.getElementById('numStepDaily');
-let columnDailyStep = document.getElementById('columnDailyStep');
-let mileStepDaily = document.getElementById('mileStepDaily');
-let calcButton = document.getElementById('calcButton');
-let valueMileStep;
+      let numResult = document.getElementById("numResult");
+      let bingoButton = document.getElementById("bingo");
+      let numSpan;
 
-function calcmileStepDaily(){
-    if(numStepDaily.value === ""){
-        valueMileStep = columnDailyStep.textContent + "を入力してください。";
-    } else {
-        valueMileStep = numStepDaily.value;
-    }
-    mileStepDaily.textContent = valueMileStep;
-};
+      // ○1~99のランダムな数字を定義して
+      // ×新規の数であれば配列に追加し、
+      // ×既出の数であれば新規の数が出るまでやり直し、
+      // ×既出数字を既出数字エリアに入れ、
+      // ×すべて出ていたら「全て出ました」と表示する関数
 
-calcButton.addEventListener('click', function(e){
-    calcmileStepDaily();
-}, false);
+      function goNext() {
+        num = Math.floor(Math.random() * numMax - numMin + 2);
+        numResult.textContent = num;
+        numSpan = document.getElementById("num"+num);
+        numSpan.style.color = 'red';
+        
+        // let out;
+        // while (out === false) {
+        //   num = Math.floor(Math.random() * numMax - numMin + 2);
+        //   console.log(numArray.indexOf(num));
+        //   if (numArray.indexOf(num) !== -1) {
+        //     console.log("既に出ている");
+        //   } else {
+        //     console.log("まだ出ていない");
+        //     out = true;
+        //   }
+        //   console.log(num);
+        // }
 
+      }
+
+      // ボタンクリックで既出数字を表示させたまま次の数字を出力
+      // 既出数字は再登場させない(配列で管理すれば解決)
+
+      bingoButton.addEventListener(
+        "click",
+        function (e) {
+          goNext();
+        },
+        false
+      );
     </script>
-
-</body>
+  </body>
 </html>
